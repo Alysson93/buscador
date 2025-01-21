@@ -14,18 +14,11 @@
 #         raise ValueError('Endereço não encontrado')
 
 
-
 import googlemaps
+from config.settings import Settings
 
-gmaps = googlemaps.Client('')
+gmaps = googlemaps.Client(Settings().GEO_API_KEY)
 
 
 def geocode(endereco):
-    geocode_result = gmaps.geocode(endereco)
-    if len(geocode_result) >= 1:
-        latitude = geocode_result[0]['geometry']['location']['lat']
-        longitude = geocode_result[0]['geometry']['location']['lng']
-    else:
-        latitude = 0
-        longitude = 0
-    return (latitude, longitude)
+    return gmaps.geocode(endereco)
